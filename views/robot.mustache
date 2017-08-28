@@ -23,7 +23,7 @@
                 <p>{{address.city}},
               {{/address.city}}
               {{#address.country}}
-                {{address.country}}
+                <a href="/country/{{address.country}}">{{address.country}}</a>
               {{/address.country}}
                |
               {{#job}}
@@ -46,7 +46,7 @@
               <tr class="">
                 <td class="bold">Skills </td>
                 <td>{{#skills}}
-                  <li>{{.}}</li>
+                  <li><a href="/skills/{{.}}">{{.}}</a></li>
                 {{/skills}}</td>
               </tr>
             </table>

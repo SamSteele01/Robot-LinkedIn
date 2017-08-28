@@ -27,25 +27,41 @@ app.get('/index/:id', function(req, res){
     const robots = db.collection('robots');
     let id = parseInt(req.params.id);
     robots.find({"id": id}).toArray(function (err, docs) {
-      console.log(docs);
       res.render("robot", {robots: docs})
     })
   })
 })
 
+app.get('/country/:country', function(req, res){
+  MongoClient.connect(mongoURL, function (err, db) {
+    const robots = db.collection('robots');
+    robots.find({"address.country": req.params.country}).toArray(function (err, docs) {
+
+      res.render("index", {robots: docs})
+    })
+  })
+})
+
+app.get('/skills/:skill', function(req, res){
+  MongoClient.connect(mongoURL, function (err, db) {
+    const robots = db.collection('robots');
+    robots.find({"skills": req.params.skill}).toArray(function (err, docs) {
+
+      res.render("index", {robots: docs})
+    })
+  })
+})
+
 app.get('/looking', function (req, res) {
-  console.log("looking");
   MongoClient.connect(mongoURL, function (err, db) {
     const robots = db.collection('robots');
     robots.find({"job": null}).toArray(function (err, docs) {
-      console.log(docs);
       res.render("index", {robots: docs})
     })
   })
 })
 
 app.get('/employed', function (req, res) {
-  console.log("employed");
   MongoClient.connect(mongoURL, function (err, db) {
     const robots = db.collection('robots');
     robots.find({"job": {$not: {$in: [null]}}}).toArray(function (err, docs) {

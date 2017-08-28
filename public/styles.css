@@ -2,8 +2,10 @@
   text-align: center;
 }
 
-.container a{
-  text-align: center;
+.container div.links{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 div.robot{
