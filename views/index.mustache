@@ -15,10 +15,24 @@
         <div class="col-xs-12">
           <!-- TODO write your HTML/Mustache here -->
           <h1><a href="/">Robot LinkedIn</a></h1>
-          <div class="links">
-            <a href="/looking">Looking for work</a>
-            <a href="/employed">Currently employed</a>
-          </div>
+          {{#index}}
+            <div class="links">
+              <a href="/looking"><h3>Looking for work</h3></a>
+              <a href="/employed"><h3>Currently employed</h3></a>
+            </div>
+          {{/index}}
+          {{#looking}}
+            <h3>Looking for work</h3>
+          {{/looking}}
+          {{#employed}}
+            <h3>Currently employed</h3>
+          {{/employed}}
+          {{#country}}
+            <h3>From {{country}}</h3>
+          {{/country}}
+          {{#skill}}
+            <h3>With {{skill}} skill</h3>
+          {{/skill}}
           <ul class="list-of-robots">
             {{#robots}}
               <div class="robot">

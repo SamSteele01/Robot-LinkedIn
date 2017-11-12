@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
   MongoClient.connect(mongoURL, function (err, db) {
     const robots = db.collection('robots');
     robots.find({}).toArray(function (err, docs) {
-      res.render("index", {robots: docs})
+      res.render("index", {robots: docs, index: true})
     })
   })
 })
@@ -36,8 +36,7 @@ app.get('/country/:country', function(req, res){
   MongoClient.connect(mongoURL, function (err, db) {
     const robots = db.collection('robots');
     robots.find({"address.country": req.params.country}).toArray(function (err, docs) {
-
-      res.render("index", {robots: docs})
+      res.render("index", {robots: docs, country: req.params.country})
     })
   })
 })
@@ -46,8 +45,7 @@ app.get('/skills/:skill', function(req, res){
   MongoClient.connect(mongoURL, function (err, db) {
     const robots = db.collection('robots');
     robots.find({"skills": req.params.skill}).toArray(function (err, docs) {
-
-      res.render("index", {robots: docs})
+      res.render("index", {robots: docs, skill: req.params.skill})
     })
   })
 })
@@ -56,7 +54,7 @@ app.get('/looking', function (req, res) {
   MongoClient.connect(mongoURL, function (err, db) {
     const robots = db.collection('robots');
     robots.find({"job": null}).toArray(function (err, docs) {
-      res.render("index", {robots: docs})
+      res.render("index", {robots: docs, looking: true})
     })
   })
 })
@@ -65,7 +63,7 @@ app.get('/employed', function (req, res) {
   MongoClient.connect(mongoURL, function (err, db) {
     const robots = db.collection('robots');
     robots.find({"job": {$not: {$in: [null]}}}).toArray(function (err, docs) {
-      res.render("index", {robots: docs})
+      res.render("index", {robots: docs, employed: true})
     })
   })
 })
